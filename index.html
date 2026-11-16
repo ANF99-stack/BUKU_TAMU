@@ -32,9 +32,9 @@ const gbPost = async payload => {
   async function gbSubmitPublic(event){
     event.preventDefault();const form=event.currentTarget,btn=form.querySelector('button[type=submit]');if(btn.disabled)return;
     const token=(new URLSearchParams(location.search).get('token')||'').trim();
-    const payload={action:'saveGuestbookEntry',token,name:form.nama.value.trim(),company:form.perusahaan.value.trim(),whatsapp:form.whatsapp.value.trim(),purpose:form.keperluan.value.trim(),person:form.bertamu.value.trim()};
+    const payload={action:'saveGuestbookEntry',token,name:form.nama.value.trim(),jabatan:form.jabatan.value.trim(),uraian:form.uraian.value.trim(),paraf:form.paraf.value.trim(),keterangan:form.keterangan.value.trim()};
     const error=document.getElementById('gb-public-error');
-    if(!token||!payload.name||!payload.whatsapp||!payload.purpose||!payload.person){error.textContent='Mohon lengkapi nama, WhatsApp, keperluan, dan orang yang ditemui.';return;}
+    if(!token||!payload.name||!payload.uraian||!payload.paraf){error.textContent='Mohon lengkapi nama visitor, uraian tugas, dan paraf.';return;}
     btn.disabled=true;btn.textContent='Menyimpan…';
     try{await gbPost(payload);document.getElementById('gb-public-form-wrap').innerHTML='<div class="gb-success"><i class="fa-solid fa-circle-check"></i><h2>Terima kasih!</h2><p>Data kunjungan Anda berhasil disimpan.</p></div>';}
     catch(e){error.textContent='Gagal menyimpan kunjungan: '+e.message;btn.disabled=false;btn.textContent='SIMPAN KUNJUNGAN';}
@@ -46,7 +46,7 @@ const gbPost = async payload => {
     try{
       const result=await gbPost({action:'getGuestbookPublicInfo',token});const branch=result.branch||{};
       document.getElementById('gb-public-branch').textContent='Cabang: '+(branch.name||'ADM Priangan 2');
-      wrap.innerHTML=`<form id="gb-public-form"><div class="gb-field"><label>Nama lengkap *</label><input name="nama" maxlength="100" required autocomplete="name" placeholder="Nama lengkap Anda"></div><div class="gb-field"><label>Asal perusahaan / instansi</label><input name="perusahaan" maxlength="120" placeholder="Nama perusahaan / instansi"></div><div class="gb-field"><label>Nomor WhatsApp *</label><input name="whatsapp" type="tel" maxlength="30" required autocomplete="tel" placeholder="08xxxxxxxxxx"></div><div class="gb-field"><label>Keperluan kunjungan *</label><textarea name="keperluan" maxlength="500" rows="3" required placeholder="Tuliskan keperluan kunjungan"></textarea></div><div class="gb-field"><label>Bertemu dengan *</label><input name="bertamu" maxlength="100" required placeholder="Nama karyawan / penanggung jawab"></div><button class="gb-submit" type="submit">SIMPAN KUNJUNGAN</button><div id="gb-public-error" class="gb-error" role="alert"></div></form>`;
+      wrap.innerHTML=`<form id="gb-public-form"><div class="gb-field"><label>Nama Visitor *</label><input name="nama" maxlength="100" required autocomplete="name" placeholder="Nama lengkap pengunjung"></div><div class="gb-field"><label>Jabatan</label><input name="jabatan" maxlength="100" placeholder="Jabatan / posisi"></div><div class="gb-field"><label>Uraian Tugas / Keperluan *</label><textarea name="uraian" maxlength="500" rows="3" required placeholder="Tuliskan uraian tugas atau keperluan kunjungan"></textarea></div><div class="gb-field"><label>Paraf *</label><input name="paraf" maxlength="100" required placeholder="Ketik nama atau paraf singkat"></div><div class="gb-field"><label>Keterangan</label><textarea name="keterangan" maxlength="500" rows="2" placeholder="Keterangan tambahan (opsional)"></textarea></div><button class="gb-submit" type="submit">SIMPAN KUNJUNGAN</button><div id="gb-public-error" class="gb-error" role="alert"></div></form>`;
       document.getElementById('gb-public-form').addEventListener('submit',gbSubmitPublic);
     }catch(e){wrap.innerHTML='<p class="gb-error">Link Buku Tamu tidak valid atau tidak aktif. '+gbEsc(e.message)+'</p>';}
   }
