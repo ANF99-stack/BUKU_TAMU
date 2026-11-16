@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#991b1b">
+<title>Buku Tamu Digital | ADM Priangan 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{font-family:'Plus Jakarta Sans',sans-serif;color:#172033;background:#f5f6fa;font-synthesis:none}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 10% 5%,#fee2e2 0,transparent 28%),radial-gradient(circle at 95% 95%,#ffedd5 0,transparent 25%),#f7f8fc;display:flex;align-items:center;justify-content:center;padding:24px}
+.wrap{width:min(100%,620px)}.brand{display:flex;align-items:center;gap:12px;margin:0 0 18px 4px}.brand-mark{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,#991b1b,#ef4444);color:white;display:grid;place-items:center;font-weight:900;box-shadow:0 8px 20px #991b1b30}.brand small{display:block;color:#991b1b;font-size:10px;font-weight:900;letter-spacing:.16em}.brand b{font-size:14px}
+.card{background:#fff;border:1px solid #e8eaf0;border-radius:26px;padding:clamp(22px,5vw,38px);box-shadow:0 24px 70px #17203312}
+.kicker{font-size:10px;letter-spacing:.18em;color:#dc2626;font-weight:900}.card h1{font-size:clamp(25px,5vw,32px);letter-spacing:-.04em;margin:9px 0 7px}.intro{color:#64748b;font-size:13px;line-height:1.7;margin:0 0 20px}
+.branch{display:flex;align-items:center;gap:10px;padding:13px 14px;border:1px solid #fee2e2;background:#fff7f7;border-radius:14px;color:#991b1b;font-size:12px;font-weight:800;margin-bottom:22px}.branch-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 4px #dcfce733;flex-shrink:0}
+.field{margin:15px 0}.field label{display:block;font-size:12px;font-weight:800;margin:0 0 7px;color:#334155}.field input,.field textarea{display:block;width:100%;border:1px solid #dce1ea;background:#fbfcfe;border-radius:13px;padding:14px 15px;font:inherit;font-size:13px;outline:none;transition:.2s}.field textarea{min-height:112px;resize:vertical}.field input:focus,.field textarea:focus{border-color:#ef4444;background:#fff;box-shadow:0 0 0 4px #fee2e2}
+.hint{font-size:10px;color:#94a3b8;margin-top:6px}.submit{width:100%;border:0;border-radius:14px;padding:15px;background:linear-gradient(100deg,#dc2626,#f97316);color:#fff;font:inherit;font-size:13px;font-weight:900;cursor:pointer;box-shadow:0 10px 22px #dc262633;margin-top:8px;transition:.2s}.submit:hover{transform:translateY(-1px);box-shadow:0 14px 25px #dc26263d}.submit:disabled{opacity:.65;cursor:wait;transform:none}
+.error{display:none;margin-top:13px;color:#b91c1c;background:#fef2f2;border:1px solid #fecaca;border-radius:12px;padding:11px;font-size:12px}.success{display:none;text-align:center;padding:25px 8px}.success-icon{width:68px;height:68px;border-radius:50%;margin:0 auto 16px;background:#dcfce7;color:#16a34a;display:grid;place-items:center;font-size:30px}.success h2{margin:0 0 8px;font-size:23px}.success p{color:#64748b;font-size:13px;line-height:1.7}.foot{text-align:center;color:#94a3b8;font-size:10px;margin:16px 0 0}
+.public-list{margin-top:18px;background:#fff;border:1px solid #e8eaf0;border-radius:22px;padding:clamp(18px,4vw,26px);box-shadow:0 18px 50px #1720330d}
+.list-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.list-head h2{font-size:17px;margin:0}.list-head p{font-size:11px;color:#64748b;margin:5px 0 0}
+.list-count{border-radius:999px;background:#fef2f2;color:#991b1b;font-size:11px;font-weight:800;padding:7px 11px}
+.public-table-wrap{overflow:auto;border:1px solid #e8eaf0;border-radius:13px}
+.public-table{border-collapse:collapse;width:100%;min-width:540px;font-size:11px}
+.public-table th{background:#f1f5f9;color:#334155;text-align:left;padding:12px 11px;white-space:nowrap}
+.public-table td{padding:12px 11px;border-top:1px solid #edf0f4;vertical-align:top;line-height:1.55}
+.public-table tbody tr:hover{background:#fffafa}
+.list-state{text-align:center;color:#64748b;font-size:12px;padding:20px}
+.list-refresh{border:1px solid #e2e8f0;background:#fff;border-radius:10px;padding:8px 11px;color:#334155;font:inherit;font-size:11px;font-weight:800;cursor:pointer}
+
+@media(max-width:520px){body{padding:14px}.card{border-radius:20px}.brand{margin-left:3px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="brand"><div class="brand-mark">P2</div><div><small>ADM PRIANGAN 2</small><b>VISITOR MANAGEMENT</b></div></div>
+  <section class="card">
+    <div class="kicker">GUEST REGISTRATION</div>
+    <h1>Buku Tamu Digital</h1>
+    <p class="intro">Selamat datang. Silakan lengkapi data kunjungan Anda. Data akan langsung tercatat pada sistem cabang setelah formulir dikirim.</p>
+    <div class="branch"><span class="branch-dot"></span><span id="branch-name">Memvalidasi QR Code cabang…</span></div>
+    <form id="guest-form" autocomplete="on">
+      <div class="field"><label for="nama">Nama lengkap *</label><input id="nama" name="nama" maxlength="100" required autocomplete="name" placeholder="Masukkan nama lengkap"></div>
+      <div class="field"><label for="jabatan">Jabatan / Instansi</label><input id="jabatan" name="jabatan" maxlength="120" placeholder="Jabatan atau asal instansi"></div>
+      <div class="field"><label for="whatsapp">Nomor WhatsApp *</label><input id="whatsapp" name="whatsapp" type="tel" maxlength="30" required autocomplete="tel" placeholder="08xxxxxxxxxx"></div>
+      <div class="field"><label for="uraian">Uraian tugas / keperluan kunjungan *</label><textarea id="uraian" name="uraian" maxlength="500" required placeholder="Tuliskan tujuan atau uraian tugas kunjungan"></textarea></div>
+      <div class="field"><label for="bertemu">Bertemu dengan</label><input id="bertemu" name="bertemu" maxlength="100" placeholder="Nama karyawan / penanggung jawab"></div>
+      <button class="submit" id="submit-btn" type="submit">SIMPAN KUNJUNGAN</button>
+      <div class="error" id="error" role="alert"></div>
+    </form>
+    <div class="success" id="success" aria-live="polite"><div class="success-icon">✓</div><h2>Terima kasih!</h2><p>Data kunjungan Anda berhasil disimpan.<br>Silakan lanjutkan keperluan Anda.</p></div>
+  </section>
+  <section class="public-list" id="public-list-section">
+    <div class="list-head">
+      <div><h2>Daftar Tamu Berkunjung</h2><p>Riwayat seluruh kunjungan yang tercatat di cabang ini.</p></div>
+      <button class="list-refresh" id="refresh-list" type="button">↻ Perbarui</button>
+    </div>
+    <div id="public-list-count" class="list-count" style="display:inline-block;margin-bottom:12px">Memuat daftar…</div>
+    <div id="public-list-content"><div class="list-state">Mengambil riwayat kunjungan…</div></div>
+  </section>
+  <div class="foot">ADM PRIANGAN 2 · Sistem Pencatatan Kunjungan</div>
+</main>
+<script>
+(function(){
+ const API='https://script.google.com/macros/s/AKfycbxjk1LKASe0zd5rTkf0eXKtBdBie1uoDHA9HAs2YM2P8DhiKaYQsrZ_xZ88eD8nucdL_g/exec';
+ const token=(new URLSearchParams(location.search).get('token')||'').trim();
+ const branchEl=document.getElementById('branch-name'),form=document.getElementById('guest-form'),btn=document.getElementById('submit-btn'),err=document.getElementById('error');
+ async function post(payload){
+   const response=await fetch(API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},redirect:'follow',body:JSON.stringify(payload)});
+   const data=await response.json();
+   if(!response.ok||data.status==='error'||data.success===false)throw new Error(data.message||'Permintaan gagal.');
+   return data;
+ }
+ function showError(message){err.textContent=message;err.style.display='block';}
+ async function loadPublicEntries(){
+   const box=document.getElementById('public-list-content'),count=document.getElementById('public-list-count');
+   if(!token){box.innerHTML='<div class="list-state">Daftar tidak tersedia karena token QR tidak valid.</div>';count.textContent='Link tidak valid';return;}
+   box.innerHTML='<div class="list-state">Memuat seluruh riwayat kunjungan…</div>';
+   try{
+     const data=await post({action:'getGuestbookPublicEntries',token});
+     const entries=Array.isArray(data.entries)?data.entries:[];
+     count.textContent=(Number(data.total)||entries.length)+' pengunjung tercatat';
+     if(!entries.length){box.innerHTML='<div class="list-state">Belum ada pengunjung yang tercatat di cabang ini.</div>';return;}
+     box.innerHTML='<div class="public-table-wrap"><table class="public-table"><thead><tr><th>NO</th><th>TANGGAL</th><th>NAMA VISITOR</th><th>INSTANSI</th><th>URAIAN KUNJUNGAN</th></tr></thead><tbody>'+
+       entries.map((x,i)=>'<tr><td>'+esc(x.no||i+1)+'</td><td>'+esc(x.tanggal||'-')+'</td><td><strong>'+esc(x.nama||'-')+'</strong></td><td>'+esc(x.instansi||'-')+'</td><td>'+esc(x.uraian||'-')+'</td></tr>').join('')+
+       '</tbody></table></div>';
+   }catch(e){count.textContent='Gagal memuat';box.innerHTML='<div class="list-state">Daftar tamu belum dapat dimuat: '+esc(e.message)+'</div>';}
+ }
+ function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+ async function init(){
+   if(!token){branchEl.textContent='QR Code tidak valid atau token tidak tersedia.';showError('Silakan scan ulang QR Code Buku Tamu dari cabang.');form.style.display='none';await loadPublicEntries();return;}
+   try{const data=await post({action:'getGuestbookPublicInfo',token});branchEl.textContent='Cabang: '+(data.branch?.name||'ADM Priangan 2');}
+   catch(e){branchEl.textContent='Link Buku Tamu tidak aktif';showError(e.message);form.style.display='none';}
+   await loadPublicEntries();
+ }
+ document.getElementById('refresh-list').addEventListener('click',loadPublicEntries);
+ form.addEventListener('submit',async function(e){
+   e.preventDefault();if(btn.disabled)return;err.style.display='none';
+   const data=new FormData(form);
+   const payload={action:'saveGuestbookEntry',token,name:String(data.get('nama')||'').trim(),company:String(data.get('jabatan')||'').trim(),whatsapp:String(data.get('whatsapp')||'').trim(),purpose:String(data.get('uraian')||'').trim(),person:String(data.get('bertemu')||'').trim()};
+   if(!payload.name||!payload.whatsapp||!payload.purpose){showError('Lengkapi nama, WhatsApp, dan uraian tugas/keperluan.');return;}
+   btn.disabled=true;btn.textContent='MENYIMPAN DATA…';
+   try{await post(payload);form.style.display='none';document.getElementById('success').style.display='block';}
+   catch(error){showError('Data belum berhasil disimpan: '+error.message);btn.disabled=false;btn.textContent='SIMPAN KUNJUNGAN';}
+ });
+ init();
+})();
+</script>
+</body>
+</html>
+
+
+=== FILE 2: BUKU_TAMU_BACKEND_TERPISAH.gs ===
+Salin bagian ini ke project Apps Script Buku Tamu, lalu deploy New Version.
+
+/**
+ * BUKU TAMU ADM PRIANGAN 2 — BACKEND TERPISAH
+ * Spreadsheet data: Buku Tamu (ID sudah diisi)
+ * Backend ini TIDAK menambahkan fungsi atau sheet ke GS utama.
+ *
+ * SETUP:
+ * 1) ID spreadsheet utama ADM sudah diisi.
+ * 2) Deploy sebagai Web App (Execute as: Me; access: Anyone).
+ * 3) Jalankan initializeGuestbook() sekali.
+ * 4) Jalankan syncGuestbookBranches() sekali, lalu setiap ada cabang baru.
+ * 5) Frontend GitHub Pages membentuk URL publik dengan token QR.
+ *    Opsional: GB_PUBLIC_APP_URL untuk mencatat link publik di MASTER_CABANG.
+ */
+const GB_CONFIG = {
+  DATA_SPREADSHEET_ID: '1sM8EMRjP9YnwpvADUuSathZ-o9GJSZ-WE7M1aCwQi3U',
+  MASTER_SPREADSHEET_ID: '1t_MfFfYuSUcLRl_82NrG4d295OO4irGjUDCfh7bAzxA',
+  TIMEZONE: 'Asia/Jakarta',
+  SHEET_VISITS: 'DATA_KUNJUNGAN',
+  SHEET_BRANCHES: 'MASTER_CABANG',
+  SHEET_SUMMARY: 'REKAP_KUNJUNGAN',
+  SHEET_CONFIG: 'KONFIGURASI_QR'
+};
+
+function doGet(e) {
+  return gbJson_({status:'online', service:'Buku Tamu ADM Priangan 2'});
+}
+
+function doPost(e) {
+  try {
+    const data = JSON.parse((e && e.postData && e.postData.contents) || '{}');
+    let result;
+    switch (String(data.action || '')) {
+      case 'saveGuestbookEntry':
+        result = gbSavePublicEntry_(data);
+        break;
+      case 'getGuestbookBranchInfo':
+        result = gbGetBranchInfoForUser_(data.username);
+        break;
+      case 'getGuestbookEntries':
+        result = gbGetEntriesForBranch_(data.username);
+        break;
+      case 'getGuestbookSummary':
+        result = gbGetSummaryForBranch_(data.username);
+        break;
+      case 'getGuestbookPublicInfo':
+        result = gbGetPublicInfo_(data.token);
+        break;
+      case 'getGuestbookPublicEntries':
+        result = gbGetPublicEntries_(data.token);
+        break;
+      default:
+        result = {status:'error', message:'Aksi Buku Tamu tidak dikenal.'};
+    }
+    return gbJson_(result);
+  } catch (err) {
+    return gbJson_({status:'error', message:String(err && err.message || err)});
+  }
+}
+
+function gbJson_(obj) {
+  return ContentService.createTextOutput(JSON.stringify(obj))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+function gbDataSS_() {
+  return SpreadsheetApp.openById(GB_CONFIG.DATA_SPREADSHEET_ID);
+}
+
+function gbEnsureVisitSheet_() {
+  const headers = ['NO','TANGGAL','NAMA VISITOR','JABATAN','URAIAN TUGAS','PARAF','KETERANGAN','_USERNAME_CABANG'];
+  const ss = gbDataSS_();
+  let sh = ss.getSheetByName(GB_CONFIG.SHEET_VISITS);
+  if (!sh) sh = ss.insertSheet(GB_CONFIG.SHEET_VISITS);
+  const current = sh.getLastRow() ? sh.getRange(1,1,1,Math.max(1,sh.getLastColumn())).getDisplayValues()[0] : [];
+  const isNew = !current.length || !String(current[0]||'').trim();
+  if (isNew) {
+    sh.getRange(1,1,1,headers.length).setValues([headers]);
+  } else if (String(current[0]).trim().toUpperCase() !== 'NO') {
+    // Migrasi data lama ke format baru tanpa menghapus isi kunjungan.
+    const old = sh.getDataRange().getValues();
+    const migrated = [headers];
+    for (let i=1;i<old.length;i++) {
+      const r=old[i];
+      const dt = r[1] instanceof Date ? r[1] : (r[2] instanceof Date ? r[2] : new Date(r[1] || r[2] || new Date()));
+      const name = r[6] || r[2] || '';
+      const jabatan = r[7] || r[3] || '';
+      const uraian = r[9] || r[4] || '';
+      const keterangan = [r[10] ? 'Bertemu: '+r[10] : '', r[8] ? 'WA: '+r[8] : '', r[11] ? 'Status: '+r[11] : ''].filter(Boolean).join(' | ');
+      migrated.push([i,dt,name,jabatan,uraian,'',keterangan,r[4]||'']);
+    }
+    sh.clearContents();
+    sh.getRange(1,1,migrated.length,headers.length).setValues(migrated);
+  }
+  sh.setFrozenRows(1);
+  sh.getRange(1,1,1,7).setBackground('#00e600').setFontColor('#000000').setFontWeight('bold').setHorizontalAlignment('center');
+  sh.getRange(1,1,Math.max(1,sh.getLastRow()),7).setVerticalAlignment('middle');
+  sh.setColumnWidth(1,55); sh.setColumnWidth(2,145); sh.setColumnWidth(3,190);
+  sh.setColumnWidth(4,125); sh.setColumnWidth(5,190); sh.setColumnWidth(6,100); sh.setColumnWidth(7,220);
+  sh.hideColumns(8);
+  if (sh.getLastRow()>1) sh.getRange(2,2,sh.getLastRow()-1,1).setNumberFormat('dd/MM/yyyy HH:mm');
+  return sh;
+}
+
+function gbEnsureSheet_(name, headers) {
+  const ss = gbDataSS_();
+  let sh = ss.getSheetByName(name);
+  if (!sh) sh = ss.insertSheet(name);
+  if (sh.getLastRow() === 0) {
+    sh.getRange(1,1,1,headers.length).setValues([headers]);
+    sh.setFrozenRows(1);
+  }
+  return sh;
+}
+
+/** Jalankan manual satu kali. Tidak menghapus sheet atau data yang sudah ada. */
+function initializeGuestbook() {
+  gbEnsureVisitSheet_();
+  gbEnsureSheet_(GB_CONFIG.SHEET_BRANCHES, [
+    'Username','NamaCabang','TokenQR','Aktif','LinkPublik','Diperbarui'
+  ]);
+  gbEnsureSheet_(GB_CONFIG.SHEET_SUMMARY, [
+    'Username','NamaCabang','TotalHariIni','TotalBulanIni','TotalSemua'
+  ]);
+  gbEnsureSheet_(GB_CONFIG.SHEET_CONFIG, ['Key','Value']);
+  return {status:'success', message:'Struktur spreadsheet Buku Tamu siap.'};
+}
+
+function gbMasterSS_() {
+  const id = String(GB_CONFIG.MASTER_SPREADSHEET_ID || '').trim();
+  if (!id || id.indexOf('ISI_ID_') === 0) {
+    throw new Error('Isi GB_CONFIG.MASTER_SPREADSHEET_ID dengan ID spreadsheet utama ADM.');
+  }
+  return SpreadsheetApp.openById(id);
+}
+
+/**
+ * Baca Users dan BranchLinks dari spreadsheet utama secara READ-ONLY.
+ * Schema sesuai backend ADM: Users kolom A=username,D=role;
+ * BranchLinks kolom A=username,C=Outlet/Nama Cabang.
+ * Tidak menulis apa pun ke spreadsheet utama.
+ */
+function syncGuestbookBranches() {
+  initializeGuestbook();
+  const master = gbMasterSS_();
+  const users = master.getSheetByName('Users');
+  const links = master.getSheetByName('BranchLinks');
+  if (!users || !links) throw new Error('Sheet Users atau BranchLinks tidak ditemukan di spreadsheet utama.');
+
+  const u = users.getDataRange().getDisplayValues();
+  const b = links.getDataRange().getDisplayValues();
+  const userMap = {};
+  for (let i=1;i<u.length;i++) {
+    const username = String(u[i][0] || '').trim();
+    const role = String(u[i][3] || '').trim().toLowerCase();
+    if (username && role === 'user') userMap[username.toLowerCase()] = username;
+  }
+
+  const branchMap = {};
+  for (let i=1;i<b.length;i++) {
+    const username = String(b[i][0] || '').trim();
+    const branchName = String(b[i][2] || '').trim();
+    if (username && branchName && userMap[username.toLowerCase()]) {
+      branchMap[username.toLowerCase()] = {username:userMap[username.toLowerCase()], branchName};
+    }
+  }
+
+  const sh = gbEnsureSheet_(GB_CONFIG.SHEET_BRANCHES,
+    ['Username','NamaCabang','TokenQR','Aktif','LinkPublik','Diperbarui']);
+  const old = sh.getDataRange().getValues();
+  const oldMap = {};
+  for (let i=1;i<old.length;i++) {
+    const key = String(old[i][0] || '').trim().toLowerCase();
+    if (key) oldMap[key] = {token:String(old[i][2] || ''), active:old[i][3] !== false};
+  }
+
+  const out = Object.keys(branchMap).sort().map(key => {
+    const item = branchMap[key], prior = oldMap[key] || {};
+    return [item.username,item.branchName,prior.token || Utilities.getUuid().replace(/-/g,''),
+      prior.active !== false,'',new Date()];
+  });
+
+  // Hanya mengganti isi MASTER_CABANG milik modul ini; sheet utama tidak disentuh.
+  if (sh.getLastRow() > 1) sh.getRange(2,1,sh.getLastRow()-1,6).clearContent();
+  if (out.length) sh.getRange(2,1,out.length,6).setValues(out);
+  refreshGuestbookPublicLinks();
+  return {status:'success', branches:out.length, message:'Master cabang tersinkronisasi (baca saja dari ADM utama).'};
+}
+
+function refreshGuestbookPublicLinks() {
+  const base = String(PropertiesService.getScriptProperties().getProperty('GB_PUBLIC_APP_URL') || '').trim();
+  if (!base) return {status:'warning', message:'Link QR dibuat oleh frontend. Jika ingin menyimpan link publik di sheet, isi Script Property GB_PUBLIC_APP_URL dengan URL halaman index GitHub Pages.'};
+  const sh = gbEnsureSheet_(GB_CONFIG.SHEET_BRANCHES,
+    ['Username','NamaCabang','TokenQR','Aktif','LinkPublik','Diperbarui']);
+  if (sh.getLastRow() < 2) return {status:'success', links:0};
+  const rows = sh.getRange(2,1,sh.getLastRow()-1,6).getValues();
+  rows.forEach((r,i) => {
+    if (r[0] && r[2] && r[3] !== false) {
+      const url = base + (base.indexOf('?') >= 0 ? '&' : '?') + 'guestbook=1&token=' + encodeURIComponent(String(r[2]));
+      sh.getRange(i+2,5).setValue(url);
+    }
+  });
+  return {status:'success', links:rows.length};
+}
+
+/** Data QR untuk dashboard User Cabang. Nama dan token diambil dari MASTER_CABANG. */
+function gbGetBranchInfoForUser_(username) {
+  const branch = gbGetAuthenticatedBranch_(username);
+  if (!branch || !branch.branchName) return {status:'error',message:'Akses ditolak atau cabang belum terdaftar.'};
+  const sh = gbEnsureSheet_(GB_CONFIG.SHEET_BRANCHES,
+    ['Username','NamaCabang','TokenQR','Aktif','LinkPublik','Diperbarui']);
+  if (sh.getLastRow() < 2) return {status:'error',message:'Master cabang belum disinkronkan. Jalankan syncGuestbookBranches().'};
+  const rows = sh.getRange(2,1,sh.getLastRow()-1,6).getValues();
+  const key = branch.username.toLowerCase();
+  for (let i=0;i<rows.length;i++) {
+    if (String(rows[i][0]||'').trim().toLowerCase() === key && rows[i][3] !== false) {
+      return {status:'success',branch:{username:branch.username,name:String(rows[i][1]||branch.branchName),branchName:String(rows[i][1]||branch.branchName),token:String(rows[i][2]||'')}};
+    }
+  }
+  return {status:'error',message:'Cabang tidak aktif atau token QR belum dibuat.'};
+}
+
+function gbFindBranchByToken_(token) {
+  const sh = gbEnsureSheet_(GB_CONFIG.SHEET_BRANCHES,
+    ['Username','NamaCabang','TokenQR','Aktif','LinkPublik','Diperbarui']);
+  if (sh.getLastRow() < 2) return null;
+  const values = sh.getRange(2,1,sh.getLastRow()-1,6).getValues();
+  const key = String(token || '').trim();
+  if (!key || key.length > 100) return null;
+  for (let i=0;i<values.length;i++) {
+    const r=values[i];
+    if (String(r[2] || '') === key && r[3] !== false) {
+      return {username:String(r[0]), branchName:String(r[1]), token:key};
+    }
+  }
+  return null;
+}
+
+function gbGetPublicInfo_(token) {
+  const branch = gbFindBranchByToken_(token);
+  return branch ? {status:'success',branch:{name:branch.branchName}} :
+    {status:'error',message:'QR/link Buku Tamu tidak valid atau sudah dinonaktifkan.'};
+}
+
+/**
+ * Daftar publik: hanya data yang disetujui untuk dilihat pengunjung.
+ * Tidak mengirim WhatsApp, paraf, keterangan internal, atau username cabang.
+ * Token QR membatasi hasil hanya ke cabang pemilik token.
+ */
+function gbGetPublicEntries_(token) {
+  const branch = gbFindBranchByToken_(token);
+  if (!branch) return {status:'error',message:'QR/link Buku Tamu tidak valid atau sudah dinonaktifkan.'};
+
+  const sh = gbEnsureVisitSheet_();
+  const last = sh.getLastRow();
+  const entries = [];
+  if (last > 1) {
+    const values = sh.getRange(2,1,last-1,8).getValues();
+    for (let i = values.length - 1; i >= 0; i--) {
+      const r = values[i];
+      if (String(r[7] || '').trim().toLowerCase() !== branch.username.toLowerCase()) continue;
+      const dt = r[1] instanceof Date
+        ? Utilities.formatDate(r[1], GB_CONFIG.TIMEZONE, 'dd/MM/yyyy HH:mm')
+        : String(r[1] || '');
+      entries.push({
+        no: Number(r[0]) || (i + 1),
+        tanggal: dt,
+        nama: String(r[2] || ''),
+        instansi: String(r[3] || ''),
+        uraian: String(r[4] || '')
+      });
+    }
+  }
+  return {
+    status:'success',
+    branchName:branch.branchName,
+    total:entries.length,
+    entries:entries
+  };
+}
+
+function gbSavePublicEntry_(data) {
+  const branch = gbFindBranchByToken_(data.token);
+  if (!branch) return {status:'error',message:'Link Buku Tamu tidak valid.'};
+
+  const clean = v => String(v == null ? '' : v).replace(/[<>]/g,'').trim();
+  const entry = {
+    name:clean(data.name), company:clean(data.company), whatsapp:clean(data.whatsapp),
+    purpose:clean(data.purpose), person:clean(data.person)
+  };
+  if (!entry.name || !entry.purpose || !entry.person) {
+    return {status:'error',message:'Nama, keperluan, dan orang yang ditemui wajib diisi.'};
+  }
+  if (entry.name.length>100 || entry.company.length>120 || entry.whatsapp.length>30 ||
+      entry.purpose.length>500 || entry.person.length>100) {
+    return {status:'error',message:'Ada isian yang melebihi batas karakter.'};
+  }
+  if (entry.whatsapp && !/^[0-9+() .-]{6,30}$/.test(entry.whatsapp)) {
+    return {status:'error',message:'Nomor WhatsApp tidak valid.'};
+  }
+
+  const lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+  try {
+    const now = new Date();
+    const date = Utilities.formatDate(now,GB_CONFIG.TIMEZONE,'yyyy-MM-dd');
+    const time = Utilities.formatDate(now,GB_CONFIG.TIMEZONE,'HH:mm:ss');
+    const sh = gbEnsureVisitSheet_();
+    const no = Math.max(1, sh.getLastRow());
+    const keterangan = [entry.person ? 'Bertemu: ' + entry.person : '', entry.whatsapp ? 'WA: ' + entry.whatsapp : '', entry.company ? 'Instansi: ' + entry.company : ''].filter(Boolean).join(' | ');
+    sh.appendRow([no, now, entry.name, entry.company, entry.purpose, '', keterangan, branch.username]);
+    const row = sh.getLastRow();
+    sh.getRange(row,1,1,7).setVerticalAlignment('middle');
+    sh.getRange(row,2).setNumberFormat('dd/MM/yyyy HH:mm');
+    return {status:'success',message:'Terima kasih. Data kunjungan berhasil disimpan.'};
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+/** Validasi User Cabang terhadap master Users; nama cabang diambil dari BranchLinks, bukan input browser. */
+function gbGetAuthenticatedBranch_(username) {
+  const key = String(username || '').trim().toLowerCase();
+  if (!key) return null;
+  const master = gbMasterSS_();
+  const users = master.getSheetByName('Users');
+  const links = master.getSheetByName('BranchLinks');
+  if (!users || !links) return null;
+  const u = users.getDataRange().getDisplayValues();
+  let validUser = false, canonical = '';
+  for (let i=1;i<u.length;i++) {
+    if (String(u[i][0] || '').trim().toLowerCase() === key &&
+        String(u[i][3] || '').trim().toLowerCase() === 'user') {
+      validUser = true; canonical = String(u[i][0]).trim(); break;
+    }
+  }
+  if (!validUser) return null;
+  const b = links.getDataRange().getDisplayValues();
+  for (let i=1;i<b.length;i++) {
+    if (String(b[i][0] || '').trim().toLowerCase() === key) {
+      return {username:canonical,branchName:String(b[i][2] || '').trim()};
+    }
+  }
+  return null;
+}
+
+function gbGetEntriesForBranch_(username) {
+  const branch = gbGetAuthenticatedBranch_(username);
+  if (!branch || !branch.branchName) return {status:'error',message:'Akses ditolak atau cabang belum terdaftar.'};
+  const sh = gbEnsureVisitSheet_();
+  if (sh.getLastRow()<2) return {status:'success',entries:[],branchName:branch.branchName};
+  const values=sh.getDataRange().getValues(), entries=[];
+  for(let i=values.length-1;i>=1 && entries.length<500;i--) {
+    const r=values[i];
+    // Sheet output mengikuti format buku tamu pada contoh gambar.
+    entries.push({no:Number(r[0])||i, tanggal:r[1] instanceof Date ? Utilities.formatDate(r[1],GB_CONFIG.TIMEZONE,'dd/MM/yyyy HH:mm') : String(r[1]||''),
+      date:r[1] instanceof Date ? Utilities.formatDate(r[1],GB_CONFIG.TIMEZONE,'yyyy-MM-dd') : String(r[1]||'').slice(0,10),
+      name:String(r[2]||''), nama:String(r[2]||''), jabatan:String(r[3]||''), purpose:String(r[4]||''),
+      uraianTugas:String(r[4]||''), paraf:String(r[5]||''), keterangan:String(r[6]||''), status:'TERCATAT'});
+  }
+  return {status:'success',entries,branchName:branch.branchName};
+}
+
+function gbGetSummaryForBranch_(username) {
+  const branch = gbGetAuthenticatedBranch_(username);
+  if (!branch || !branch.branchName) return {status:'error',message:'Akses ditolak atau cabang belum terdaftar.'};
+  const sh = gbEnsureVisitSheet_();
+  const today=Utilities.formatDate(new Date(),GB_CONFIG.TIMEZONE,'yyyy-MM-dd');
+  const month=today.slice(0,7);
+  let todayCount=0, monthCount=0, total=0;
+  const last=sh.getLastRow();
+  if(last>1){
+    const rows=sh.getRange(2,2,last-1,2).getValues(); // Tanggal dan Nama Visitor
+    // Sheet ini dipisahkan per cabang melalui konfigurasi token. Untuk rekap cabang,
+    // gunakan metadata cabang yang dicatat pada kolom tersembunyi H.
+    const owners=sh.getRange(2,8,last-1,1).getDisplayValues();
+    rows.forEach((r,i)=>{
+      if(String(owners[i][0]||'').trim().toLowerCase()!==branch.username.toLowerCase()) return;
+      total++;
+      const d=r[0] instanceof Date ? Utilities.formatDate(r[0],GB_CONFIG.TIMEZONE,'yyyy-MM-dd') : String(r[0]||'').slice(0,10);
+      if(d===today) todayCount++;
+      if(d.slice(0,7)===month) monthCount++;
+    });
+  }
+  return {status:'success',today:todayCount,month:monthCount,total:total};
+}
+
+/** Diagnostik aman: tidak mengubah spreadsheet utama. */
+function testGuestbookBackend() {
+  const data = gbDataSS_();
+  const master = gbMasterSS_();
+  return {status:'success',dataSpreadsheet:data.getName(),masterSpreadsheet:master.getName(),
+    dataSheets:[GB_CONFIG.SHEET_VISITS,GB_CONFIG.SHEET_BRANCHES,GB_CONFIG.SHEET_SUMMARY,GB_CONFIG.SHEET_CONFIG]};
+}
