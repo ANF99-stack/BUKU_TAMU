@@ -114,7 +114,9 @@ const gbPost = async payload => {
 (function(){
  const token=(new URLSearchParams(location.search).get('token')||'').trim();
  const wrap=document.getElementById('gb-public-form-wrap');
- if(!token){document.getElementById('gb-public-branch').textContent='Tautan tidak valid';wrap.innerHTML='<p class="gb-error">Token cabang tidak ditemukan. Silakan scan QR Code yang diberikan oleh cabang.</p>';return;}
+ const historyLink=document.getElementById('gb-open-history');
+ if(historyLink && token) historyLink.href='riwayat.html?token='+encodeURIComponent(token);
+ if(!token){document.getElementById('gb-public-branch').textContent='Tautan tidak valid';wrap.innerHTML='<p class="gb-error">Token cabang tidak ditemukan. Silakan scan QR Code yang diberikan oleh cabang.</p>';if(historyLink){historyLink.removeAttribute('href');historyLink.setAttribute('aria-disabled','true');historyLink.style.opacity='.5';}return;}
  gbStartPublic();
 })();
 </script></body></html>
