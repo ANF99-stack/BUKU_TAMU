@@ -99,9 +99,24 @@ async function post(payload){
  return data;
 }
 let entries=[],busy=false;
+function getVisitTimestamp(x){
+ const date=String(x.tanggal||x.date||'').trim();
+ const time=String(x.jam||x.time||'00:00').trim();
+ let d=null, m=date.match(/^(\d{4})[-/](\d{1,2})[-/](\d{1,2})/);
+ if(m) d=new Date(Number(m[1]),Number(m[2])-1,Number(m[3]));
+ if(!d){m=date.match(/^(\d{1,2})[/-](\d{1,2})[/-](\d{4})/);if(m)d=new Date(Number(m[3]),Number(m[2])-1,Number(m[1]));}
+ if(!d||Number.isNaN(d.getTime())){const parsed=new Date(date);if(!Number.isNaN(parsed.getTime()))d=parsed;}
+ if(!d)return 0;
+ const tm=time.match(/(\d{1,2}):(\d{2})(?::(\d{2}))?/);
+ if(tm)d.setHours(Number(tm[1]),Number(tm[2]),Number(tm[3]||0),0);
+ return d.getTime();
+}
 function render(){
  const q=(document.getElementById('gb-history-search').value||'').trim().toLowerCase();
- const rows=entries.filter(x=>[x.nama,x.name,x.instansi,x.jabatan,x.uraian,x.keterangan].some(v=>String(v||'').toLowerCase().includes(q)));
+ // Urutkan kunjungan terbaru di posisi teratas; nomor mengikuti urutan tampilan.
+ const sortedEntries=entries.map((entry,index)=>({entry,index,stamp:getVisitTimestamp(entry)}))
+  .sort((a,b)=>(b.stamp-a.stamp)||(a.index-b.index)).map(item=>item.entry);
+ const rows=sortedEntries.filter(x=>[x.nama,x.name,x.instansi,x.jabatan,x.uraian,x.keterangan].some(v=>String(v||'').toLowerCase().includes(q)));
  document.getElementById('gb-history-count').textContent=entries.length+' Kunjungan';
  const target=document.getElementById('gb-history-list');
  if(!rows.length){target.innerHTML='<div class="gb-history-empty">'+(q?'Tidak ada kunjungan yang cocok.':'Belum ada riwayat kunjungan pada cabang ini.')+'</div>';return;}
@@ -112,7 +127,7 @@ function render(){
    const purpose=x.uraian||x.purpose||'Keperluan tidak dicantumkan';
    const note=x.keterangan||'';
    const time=x.jam||x.time||'';
-   return '<article class="gb-visit-card"><div class="gb-visit-number">'+esc(x.no||i+1)+'</div><div><h3 class="gb-visit-name">'+esc(name)+'</h3><div class="gb-visit-meta"><span>▣ '+esc(role)+'</span><span>▤ '+esc(date)+'</span></div><div class="gb-visit-purpose">'+esc(purpose)+'</div>'+(note?'<div class="gb-visit-detail"><strong>Keterangan:</strong><span>'+esc(note)+'</span></div>':'')+'</div><div class="gb-visit-time">'+(time?'◷ '+esc(time):'')+'</div></article>';
+   return '<article class="gb-visit-card"><div class="gb-visit-number">'+esc(i+1)+'</div><div><h3 class="gb-visit-name">'+esc(name)+'</h3><div class="gb-visit-meta"><span>▣ '+esc(role)+'</span><span>▤ '+esc(date)+'</span></div><div class="gb-visit-purpose">'+esc(purpose)+'</div>'+(note?'<div class="gb-visit-detail"><strong>Keterangan:</strong><span>'+esc(note)+'</span></div>':'')+'</div><div class="gb-visit-time">'+(time?'◷ '+esc(time):'')+'</div></article>';
  }).join('')+'</div>';
 }
 async function load(){
