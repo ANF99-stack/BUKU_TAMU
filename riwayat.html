@@ -73,6 +73,10 @@ body{padding:24px 16px;background:radial-gradient(circle at 5% 0%,#ffe4e6 0,tran
  .gb-visit-time{grid-column:2;white-space:normal}
 }
 
+
+.gb-visit-detail{display:flex;gap:7px;align-items:flex-start;margin-top:8px;padding:8px 10px;border:1px solid #f1e5e5;border-radius:10px;background:#fffafa;color:#7f1d1d;font-size:12px;line-height:1.5}
+.gb-visit-detail strong{flex:0 0 auto;color:#991b1b;font-weight:850}
+.gb-visit-detail span{min-width:0;overflow-wrap:anywhere}
 </style></head><body>
 <main class="gb-history-page"><section class="gb-history-shell">
 <header class="gb-history-top"><div class="gb-history-eyebrow">ADM PRIANGAN 2 · BUKU TAMU DIGITAL</div><h1>Riwayat Kunjungan</h1><p>Daftar pengunjung yang tercatat pada <strong id="gb-branch-name">cabang ini</strong>.</p></header>
@@ -105,9 +109,10 @@ function render(){
    const date=x.tanggal||x.date||'-';
    const name=x.nama||x.name||'Pengunjung';
    const role=x.jabatan||x.instansi||'Jabatan tidak dicantumkan';
-   const purpose=x.uraian||x.purpose||x.keterangan||'Keperluan tidak dicantumkan';
+   const purpose=x.uraian||x.purpose||'Keperluan tidak dicantumkan';
+   const note=x.keterangan||'';
    const time=x.jam||x.time||'';
-   return '<article class="gb-visit-card"><div class="gb-visit-number">'+esc(x.no||i+1)+'</div><div><h3 class="gb-visit-name">'+esc(name)+'</h3><div class="gb-visit-meta"><span>▣ '+esc(role)+'</span><span>▤ '+esc(date)+'</span></div><div class="gb-visit-purpose">'+esc(purpose)+'</div></div><div class="gb-visit-time">'+(time?'◷ '+esc(time):'')+'</div></article>';
+   return '<article class="gb-visit-card"><div class="gb-visit-number">'+esc(x.no||i+1)+'</div><div><h3 class="gb-visit-name">'+esc(name)+'</h3><div class="gb-visit-meta"><span>▣ '+esc(role)+'</span><span>▤ '+esc(date)+'</span></div><div class="gb-visit-purpose">'+esc(purpose)+'</div>'+(note?'<div class="gb-visit-detail"><strong>Keterangan:</strong><span>'+esc(note)+'</span></div>':'')+'</div><div class="gb-visit-time">'+(time?'◷ '+esc(time):'')+'</div></article>';
  }).join('')+'</div>';
 }
 async function load(){
