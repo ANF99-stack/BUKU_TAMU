@@ -1,112 +1,60 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#991b1b">
-<title>Buku Tamu Digital | ADM Priangan 2</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#991b1b"><title>Buku Tamu Digital | ADM Priangan 2</title>
 <style>
-:root{font-family:'Plus Jakarta Sans',sans-serif;color:#172033;background:#f5f6fa;font-synthesis:none}
-*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 10% 5%,#fee2e2 0,transparent 28%),radial-gradient(circle at 95% 95%,#ffedd5 0,transparent 25%),#f7f8fc;display:flex;align-items:center;justify-content:center;padding:24px}
-.wrap{width:min(100%,620px)}.brand{display:flex;align-items:center;gap:12px;margin:0 0 18px 4px}.brand-mark{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,#991b1b,#ef4444);color:white;display:grid;place-items:center;font-weight:900;box-shadow:0 8px 20px #991b1b30}.brand small{display:block;color:#991b1b;font-size:10px;font-weight:900;letter-spacing:.16em}.brand b{font-size:14px}
-.card{background:#fff;border:1px solid #e8eaf0;border-radius:26px;padding:clamp(22px,5vw,38px);box-shadow:0 24px 70px #17203312}
-.kicker{font-size:10px;letter-spacing:.18em;color:#dc2626;font-weight:900}.card h1{font-size:clamp(25px,5vw,32px);letter-spacing:-.04em;margin:9px 0 7px}.intro{color:#64748b;font-size:13px;line-height:1.7;margin:0 0 20px}
-.branch{display:flex;align-items:center;gap:10px;padding:13px 14px;border:1px solid #fee2e2;background:#fff7f7;border-radius:14px;color:#991b1b;font-size:12px;font-weight:800;margin-bottom:22px}.branch-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 4px #dcfce733;flex-shrink:0}
-.field{margin:15px 0}.field label{display:block;font-size:12px;font-weight:800;margin:0 0 7px;color:#334155}.field input,.field textarea{display:block;width:100%;border:1px solid #dce1ea;background:#fbfcfe;border-radius:13px;padding:14px 15px;font:inherit;font-size:13px;outline:none;transition:.2s}.field textarea{min-height:112px;resize:vertical}.field input:focus,.field textarea:focus{border-color:#ef4444;background:#fff;box-shadow:0 0 0 4px #fee2e2}
-.hint{font-size:10px;color:#94a3b8;margin-top:6px}.submit{width:100%;border:0;border-radius:14px;padding:15px;background:linear-gradient(100deg,#dc2626,#f97316);color:#fff;font:inherit;font-size:13px;font-weight:900;cursor:pointer;box-shadow:0 10px 22px #dc262633;margin-top:8px;transition:.2s}.submit:hover{transform:translateY(-1px);box-shadow:0 14px 25px #dc26263d}.submit:disabled{opacity:.65;cursor:wait;transform:none}
-.error{display:none;margin-top:13px;color:#b91c1c;background:#fef2f2;border:1px solid #fecaca;border-radius:12px;padding:11px;font-size:12px}.success{display:none;text-align:center;padding:25px 8px}.success-icon{width:68px;height:68px;border-radius:50%;margin:0 auto 16px;background:#dcfce7;color:#16a34a;display:grid;place-items:center;font-size:30px}.success h2{margin:0 0 8px;font-size:23px}.success p{color:#64748b;font-size:13px;line-height:1.7}.foot{text-align:center;color:#94a3b8;font-size:10px;margin:16px 0 0}
-.public-list{margin-top:18px;background:#fff;border:1px solid #e8eaf0;border-radius:22px;padding:clamp(18px,4vw,26px);box-shadow:0 18px 50px #1720330d}
-.list-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
-.list-head h2{font-size:17px;margin:0}.list-head p{font-size:11px;color:#64748b;margin:5px 0 0}
-.list-count{border-radius:999px;background:#fef2f2;color:#991b1b;font-size:11px;font-weight:800;padding:7px 11px}
-.public-table-wrap{overflow:auto;border:1px solid #e8eaf0;border-radius:13px}
-.public-table{border-collapse:collapse;width:100%;min-width:540px;font-size:11px}
-.public-table th{background:#f1f5f9;color:#334155;text-align:left;padding:12px 11px;white-space:nowrap}
-.public-table td{padding:12px 11px;border-top:1px solid #edf0f4;vertical-align:top;line-height:1.55}
-.public-table tbody tr:hover{background:#fffafa}
-.list-state{text-align:center;color:#64748b;font-size:12px;padding:20px}
-.list-refresh{border:1px solid #e2e8f0;background:#fff;border-radius:10px;padding:8px 11px;color:#334155;font:inherit;font-size:11px;font-weight:800;cursor:pointer}
-
-@media(max-width:520px){body{padding:14px}.card{border-radius:20px}.brand{margin-left:3px}}
-</style>
-</head>
-<body>
-<main class="wrap">
-  <div class="brand"><div class="brand-mark">P2</div><div><small>ADM PRIANGAN 2</small><b>VISITOR MANAGEMENT</b></div></div>
-  <section class="card">
-    <div class="kicker">GUEST REGISTRATION</div>
-    <h1>Buku Tamu Digital</h1>
-    <p class="intro">Selamat datang. Silakan lengkapi data kunjungan Anda. Data akan langsung tercatat pada sistem cabang setelah formulir dikirim.</p>
-    <div class="branch"><span class="branch-dot"></span><span id="branch-name">Memvalidasi QR Code cabang…</span></div>
-    <form id="guest-form" autocomplete="on">
-      <div class="field"><label for="nama">Nama lengkap *</label><input id="nama" name="nama" maxlength="100" required autocomplete="name" placeholder="Masukkan nama lengkap"></div>
-      <div class="field"><label for="jabatan">Jabatan / Instansi</label><input id="jabatan" name="jabatan" maxlength="120" placeholder="Jabatan atau asal instansi"></div>
-      <div class="field"><label for="whatsapp">Nomor WhatsApp *</label><input id="whatsapp" name="whatsapp" type="tel" maxlength="30" required autocomplete="tel" placeholder="08xxxxxxxxxx"></div>
-      <div class="field"><label for="uraian">Uraian tugas / keperluan kunjungan *</label><textarea id="uraian" name="uraian" maxlength="500" required placeholder="Tuliskan tujuan atau uraian tugas kunjungan"></textarea></div>
-      <div class="field"><label for="bertemu">Bertemu dengan</label><input id="bertemu" name="bertemu" maxlength="100" placeholder="Nama karyawan / penanggung jawab"></div>
-      <button class="submit" id="submit-btn" type="submit">SIMPAN KUNJUNGAN</button>
-      <div class="error" id="error" role="alert"></div>
-    </form>
-    <div class="success" id="success" aria-live="polite"><div class="success-icon">✓</div><h2>Terima kasih!</h2><p>Data kunjungan Anda berhasil disimpan.<br>Silakan lanjutkan keperluan Anda.</p></div>
-  </section>
-  <section class="public-list" id="public-list-section">
-    <div class="list-head">
-      <div><h2>Daftar Tamu Berkunjung</h2><p>Riwayat seluruh kunjungan yang tercatat di cabang ini.</p></div>
-      <button class="list-refresh" id="refresh-list" type="button">↻ Perbarui</button>
-    </div>
-    <div id="public-list-count" class="list-count" style="display:inline-block;margin-bottom:12px">Memuat daftar…</div>
-    <div id="public-list-content"><div class="list-state">Mengambil riwayat kunjungan…</div></div>
-  </section>
-  <div class="foot">ADM PRIANGAN 2 · Sistem Pencatatan Kunjungan</div>
-</main>
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#fff7f7,#f1f5f9);font-family:Arial,Helvetica,sans-serif;color:#172033;min-height:100vh}
+.gb-shell{max-width:1200px;margin:18px auto;padding:0 4px;color:#172033}.gb-hero{background:linear-gradient(120deg,#7f1d1d,#dc2626);border-radius:18px;padding:25px 28px;color:#fff;display:flex;justify-content:space-between;align-items:center;box-shadow:0 10px 28px #991b1b22}.gb-kicker{font-size:11px;letter-spacing:2px;font-weight:800;opacity:.8}.gb-hero h2{margin:7px 0;font-size:25px}.gb-hero p{margin:0;opacity:.9}.gb-hero-icon{font-size:44px;opacity:.8}.gb-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0}.gb-stat,.gb-panel{background:#fff;border:1px solid #e5e7eb;border-radius:15px;padding:17px;box-shadow:0 4px 16px #0f172a08}.gb-stat span{display:block;color:#64748b;font-size:13px}.gb-stat b{display:block;font-size:26px;margin-top:6px;color:#991b1b}.gb-panel{margin:14px 0}.gb-panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:15px}.gb-panel-head h3{margin:0 0 5px;font-size:17px}.gb-panel-head p,.gb-qr-info p{margin:0;color:#64748b;font-size:13px}.gb-qr-row{display:flex;align-items:center;gap:22px;flex-wrap:wrap}.gb-qr-preview{width:170px;text-align:center}.gb-qr-preview img{width:150px;height:150px;object-fit:contain;border:1px solid #e5e7eb;border-radius:12px;padding:7px}.gb-qr-preview small{display:block;margin-top:6px;color:#64748b}.gb-qr-info{flex:1;min-width:240px}.gb-link-text{word-break:break-all;margin:7px 0 12px!important;color:#991b1b!important}.gb-actions{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.gb-btn{border:0;border-radius:9px;background:#b91c1c;color:white;padding:10px 14px;font-weight:700;cursor:pointer}.gb-btn.secondary{background:#f1f5f9;color:#334155;border:1px solid #e2e8f0}.gb-filters{display:flex;gap:10px;margin-bottom:12px}.gb-filters input{border:1px solid #cbd5e1;border-radius:9px;padding:10px;min-width:180px}.gb-table-wrap{overflow:auto}.gb-table{width:100%;border-collapse:collapse;min-width:760px;font-size:13px}.gb-table th,.gb-table td{padding:10px;border-bottom:1px solid #e5e7eb;text-align:left;white-space:nowrap}.gb-table th{background:#f8fafc;color:#475569}.gb-status{font-size:13px;color:#64748b;margin:8px 0}.gb-public-page{max-width:620px;margin:32px auto;padding:18px;font-family:inherit;color:#172033}.gb-public-card{background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:24px;box-shadow:0 12px 36px #0f172a12}.gb-public-brand{font-size:11px;letter-spacing:2px;color:#b91c1c;font-weight:800}.gb-public-card h1{font-size:24px;margin:8px 0}.gb-public-card p{color:#64748b}.gb-field{margin:14px 0}.gb-field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}.gb-field input,.gb-field textarea{width:100%;box-sizing:border-box;padding:12px;border:1px solid #cbd5e1;border-radius:9px;font:inherit}.gb-submit{width:100%;padding:13px;border:0;border-radius:10px;background:#b91c1c;color:#fff;font-weight:800;font-size:15px;cursor:pointer}.gb-submit:disabled{opacity:.6;cursor:wait}.gb-success{text-align:center;padding:24px 8px}.gb-success i{font-size:48px;color:#16a34a}.gb-error{color:#b91c1c;font-size:13px;margin-top:10px}@media(max-width:650px){.gb-stats{grid-template-columns:1fr}.gb-filters{flex-direction:column}.gb-filters input{width:100%;box-sizing:border-box}.gb-hero{padding:20px}.gb-hero h2{font-size:21px}.gb-panel{padding:13px}.gb-panel-head{align-items:flex-start}.gb-public-page{margin:12px auto;padding:10px}}
+.gb-public-page{max-width:620px;margin:32px auto;padding:18px}.gb-public-card{padding:clamp(20px,5vw,30px)}
+.gb-public-card input:focus,.gb-public-card textarea:focus{outline:2px solid #fecaca;border-color:#b91c1c}
+.gb-public-card .gb-public-brand{display:flex;align-items:center;gap:8px}.gb-public-brand:before{content:'📖';font-size:18px}
+.gb-public-branch{background:#fff1f2;color:#9f1239;padding:11px 13px;border-radius:9px;font-weight:700;font-size:14px;margin:16px 0}
+.gb-loading{text-align:center;color:#64748b;padding:20px}.gb-success{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;color:#166534}.gb-success p{color:#166534}
+@media(max-width:650px){.gb-public-page{margin:12px auto;padding:10px}.gb-public-card{border-radius:14px}}
+</style></head><body>
+<main class="gb-public-page"><section class="gb-public-card">
+<div class="gb-public-brand">ADM PRIANGAN 2 · BUKU TAMU DIGITAL</div>
+<h1>Form Buku Tamu</h1><p>Selamat datang. Silakan isi data kunjungan Anda. Data akan langsung tercatat setelah dikirim.</p>
+<div id="gb-public-branch" class="gb-public-branch">Memvalidasi link cabang…</div>
+<div id="gb-public-form-wrap" class="gb-loading">Mohon tunggu sebentar…</div>
+<footer style="text-align:center;color:#94a3b8;font-size:11px;margin-top:22px">Sistem Buku Tamu Digital · ADM Priangan 2</footer>
+</section></main>
 <script>
-(function(){
- const API='https://script.google.com/macros/s/AKfycbxjk1LKASe0zd5rTkf0eXKtBdBie1uoDHA9HAs2YM2P8DhiKaYQsrZ_xZ88eD8nucdL_g/exec';
- const token=(new URLSearchParams(location.search).get('token')||'').trim();
- const branchEl=document.getElementById('branch-name'),form=document.getElementById('guest-form'),btn=document.getElementById('submit-btn'),err=document.getElementById('error');
- async function post(payload){
-   const response=await fetch(API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},redirect:'follow',body:JSON.stringify(payload)});
-   const data=await response.json();
-   if(!response.ok||data.status==='error'||data.success===false)throw new Error(data.message||'Permintaan gagal.');
-   return data;
- }
- function showError(message){err.textContent=message;err.style.display='block';}
- async function loadPublicEntries(){
-   const box=document.getElementById('public-list-content'),count=document.getElementById('public-list-count');
-   if(!token){box.innerHTML='<div class="list-state">Daftar tidak tersedia karena token QR tidak valid.</div>';count.textContent='Link tidak valid';return;}
-   box.innerHTML='<div class="list-state">Memuat seluruh riwayat kunjungan…</div>';
-   try{
-     const data=await post({action:'getGuestbookPublicEntries',token});
-     const entries=Array.isArray(data.entries)?data.entries:[];
-     count.textContent=(Number(data.total)||entries.length)+' pengunjung tercatat';
-     if(!entries.length){box.innerHTML='<div class="list-state">Belum ada pengunjung yang tercatat di cabang ini.</div>';return;}
-     box.innerHTML='<div class="public-table-wrap"><table class="public-table"><thead><tr><th>NO</th><th>TANGGAL</th><th>NAMA VISITOR</th><th>INSTANSI</th><th>URAIAN KUNJUNGAN</th></tr></thead><tbody>'+
-       entries.map((x,i)=>'<tr><td>'+esc(x.no||i+1)+'</td><td>'+esc(x.tanggal||'-')+'</td><td><strong>'+esc(x.nama||'-')+'</strong></td><td>'+esc(x.instansi||'-')+'</td><td>'+esc(x.uraian||'-')+'</td></tr>').join('')+
-       '</tbody></table></div>';
-   }catch(e){count.textContent='Gagal memuat';box.innerHTML='<div class="list-state">Daftar tamu belum dapat dimuat: '+esc(e.message)+'</div>';}
- }
- function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
- async function init(){
-   if(!token){branchEl.textContent='QR Code tidak valid atau token tidak tersedia.';showError('Silakan scan ulang QR Code Buku Tamu dari cabang.');form.style.display='none';await loadPublicEntries();return;}
-   try{const data=await post({action:'getGuestbookPublicInfo',token});branchEl.textContent='Cabang: '+(data.branch?.name||'ADM Priangan 2');}
-   catch(e){branchEl.textContent='Link Buku Tamu tidak aktif';showError(e.message);form.style.display='none';}
-   await loadPublicEntries();
- }
- document.getElementById('refresh-list').addEventListener('click',loadPublicEntries);
- form.addEventListener('submit',async function(e){
-   e.preventDefault();if(btn.disabled)return;err.style.display='none';
-   const data=new FormData(form);
-   const payload={action:'saveGuestbookEntry',token,name:String(data.get('nama')||'').trim(),company:String(data.get('jabatan')||'').trim(),whatsapp:String(data.get('whatsapp')||'').trim(),purpose:String(data.get('uraian')||'').trim(),person:String(data.get('bertemu')||'').trim()};
-   if(!payload.name||!payload.whatsapp||!payload.purpose){showError('Lengkapi nama, WhatsApp, dan uraian tugas/keperluan.');return;}
-   btn.disabled=true;btn.textContent='MENYIMPAN DATA…';
-   try{await post(payload);form.style.display='none';document.getElementById('success').style.display='block';}
-   catch(error){showError('Data belum berhasil disimpan: '+error.message);btn.disabled=false;btn.textContent='SIMPAN KUNJUNGAN';}
- });
- init();
-})();
-</script>
-</body>
-</html>
+const GB_API = 'https://script.google.com/macros/s/AKfycbxjk1LKASe0zd5rTkf0eXKtBdBie1uoDHA9HAs2YM2P8DhiKaYQsrZ_xZ88eD8nucdL_g/exec';
+const gbEsc = v => String(v ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const gbPost = async payload => {
+  const r=await fetch(GB_API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},redirect:'follow',body:JSON.stringify(payload)});
+  const data=await r.json();
+  if(!r.ok || data?.status==='error' || data?.success===false) throw new Error(data?.message||`Permintaan gagal (${r.status})`);
+  return data;
+};
+  async function gbSubmitPublic(event){
+    event.preventDefault();const form=event.currentTarget,btn=form.querySelector('button[type=submit]');if(btn.disabled)return;
+    const token=(new URLSearchParams(location.search).get('token')||'').trim();
+    const payload={action:'saveGuestbookEntry',token,name:form.nama.value.trim(),company:form.perusahaan.value.trim(),whatsapp:form.whatsapp.value.trim(),purpose:form.keperluan.value.trim(),person:form.bertamu.value.trim()};
+    const error=document.getElementById('gb-public-error');
+    if(!token||!payload.name||!payload.whatsapp||!payload.purpose||!payload.person){error.textContent='Mohon lengkapi nama, WhatsApp, keperluan, dan orang yang ditemui.';return;}
+    btn.disabled=true;btn.textContent='Menyimpan…';
+    try{await gbPost(payload);document.getElementById('gb-public-form-wrap').innerHTML='<div class="gb-success"><i class="fa-solid fa-circle-check"></i><h2>Terima kasih!</h2><p>Data kunjungan Anda berhasil disimpan.</p></div>';}
+    catch(e){error.textContent='Gagal menyimpan kunjungan: '+e.message;btn.disabled=false;btn.textContent='SIMPAN KUNJUNGAN';}
+  }
+  async function gbStartPublic(){
+    const token=(new URLSearchParams(location.search).get('token')||'').trim();
+    const wrap=document.getElementById('gb-public-form-wrap');
+    if(!token){wrap.innerHTML='<p class="gb-error">Link Buku Tamu tidak valid karena token tidak tersedia.</p>';return;}
+    try{
+      const result=await gbPost({action:'getGuestbookPublicInfo',token});const branch=result.branch||{};
+      document.getElementById('gb-public-branch').textContent='Cabang: '+(branch.name||'ADM Priangan 2');
+      wrap.innerHTML=`<form id="gb-public-form"><div class="gb-field"><label>Nama lengkap *</label><input name="nama" maxlength="100" required autocomplete="name" placeholder="Nama lengkap Anda"></div><div class="gb-field"><label>Asal perusahaan / instansi</label><input name="perusahaan" maxlength="120" placeholder="Nama perusahaan / instansi"></div><div class="gb-field"><label>Nomor WhatsApp *</label><input name="whatsapp" type="tel" maxlength="30" required autocomplete="tel" placeholder="08xxxxxxxxxx"></div><div class="gb-field"><label>Keperluan kunjungan *</label><textarea name="keperluan" maxlength="500" rows="3" required placeholder="Tuliskan keperluan kunjungan"></textarea></div><div class="gb-field"><label>Bertemu dengan *</label><input name="bertamu" maxlength="100" required placeholder="Nama karyawan / penanggung jawab"></div><button class="gb-submit" type="submit">SIMPAN KUNJUNGAN</button><div id="gb-public-error" class="gb-error" role="alert"></div></form>`;
+      document.getElementById('gb-public-form').addEventListener('submit',gbSubmitPublic);
+    }catch(e){wrap.innerHTML='<p class="gb-error">Link Buku Tamu tidak valid atau tidak aktif. '+gbEsc(e.message)+'</p>';}
+  }
 
+(function(){
+ const token=(new URLSearchParams(location.search).get('token')||'').trim();
+ const wrap=document.getElementById('gb-public-form-wrap');
+ if(!token){document.getElementById('gb-public-branch').textContent='Tautan tidak valid';wrap.innerHTML='<p class="gb-error">Token cabang tidak ditemukan. Silakan scan QR Code yang diberikan oleh cabang.</p>';return;}
+ gbStartPublic();
+})();
+</script></body></html>
