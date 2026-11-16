@@ -35,11 +35,49 @@ body{margin:0;min-height:100vh;padding:28px 18px;background:radial-gradient(elli
 .gb-history-footer{margin-top:18px;display:flex;justify-content:flex-start}
 @media(max-width:700px){body{padding:12px 9px}.gb-history-shell{border-radius:20px}.gb-history-top{padding:23px 20px}.gb-history-content{padding:20px 16px}.gb-history-head{flex-direction:column;align-items:flex-start}.gb-history-tools{align-items:stretch;flex-wrap:wrap}.gb-history-search{flex-basis:100%}.gb-history-refresh{flex:1}.gb-history-scroll{max-height:58vh}}
 
+
+/* Modern concept 2 — summary tiles and visitor cards */
+body{padding:24px 16px;background:radial-gradient(circle at 5% 0%,#ffe4e6 0,transparent 34%),linear-gradient(145deg,#f8fafc,#f1f5f9)}
+.gb-history-page{max-width:1000px}
+.gb-history-shell{border-radius:28px;box-shadow:0 24px 65px rgba(15,23,42,.12)}
+.gb-history-top{position:relative;overflow:hidden;padding:30px 34px;background:linear-gradient(115deg,#8f1118,#c51624 65%,#ef4444)}
+.gb-history-top:after{content:"";position:absolute;right:-55px;top:-110px;width:260px;height:260px;border:1px solid rgba(255,255,255,.15);border-radius:50%;box-shadow:0 0 0 24px rgba(255,255,255,.04),0 0 0 50px rgba(255,255,255,.025)}
+.gb-history-top h1{position:relative;z-index:1;font-size:clamp(27px,4vw,35px)}
+.gb-history-top p{position:relative;z-index:1}
+.gb-history-content{padding:26px 30px 30px}
+.gb-history-head{align-items:center}
+.gb-history-title{font-size:21px}
+.gb-history-count{padding:9px 14px;background:#fff1f2;border:1px solid #ffe4e6}
+.gb-history-tools{padding:12px;border:1px solid #edf0f5;border-radius:17px;background:#f8fafc}
+.gb-history-search{height:48px;border-radius:13px;background:#fff}
+.gb-history-refresh,.gb-history-back{height:48px;border-radius:13px;background:#fff}
+.gb-history-scroll{max-height:62vh;min-height:220px;padding:12px;border:0;background:#f8fafc;border-radius:18px}
+.gb-history-cards{display:grid;grid-template-columns:1fr;gap:10px}
+.gb-visit-card{display:grid;grid-template-columns:54px minmax(0,1fr) auto;gap:13px;align-items:center;padding:15px 16px;border:1px solid #e8edf4;border-left:4px solid #dc2626;border-radius:16px;background:#fff;box-shadow:0 4px 13px rgba(15,23,42,.045)}
+.gb-visit-number{display:grid;place-items:center;width:48px;height:48px;border-radius:14px;background:#fff1f2;color:#b91c1c;font-size:17px;font-weight:900}
+.gb-visit-name{margin:0 0 5px;color:#172033;font-size:14px;font-weight:850}
+.gb-visit-meta{display:flex;flex-wrap:wrap;gap:6px 14px;color:#64748b;font-size:12px;line-height:1.5}
+.gb-visit-purpose{margin-top:5px;color:#334155;font-size:12px;line-height:1.5}
+.gb-visit-time{color:#64748b;font-size:11px;white-space:nowrap}
+.gb-history-empty,.gb-history-loading{padding:36px 16px;border:1px dashed #dbe2ea;border-radius:15px;background:#fff}
+@media(max-width:700px){
+ body{padding:11px 8px}
+ .gb-history-shell{border-radius:21px}
+ .gb-history-top{padding:24px 20px}
+ .gb-history-content{padding:19px 14px 22px}
+ .gb-history-head{gap:9px}
+ .gb-history-tools{padding:9px}
+ .gb-history-scroll{max-height:62vh;padding:8px}
+ .gb-visit-card{grid-template-columns:43px minmax(0,1fr);gap:10px;padding:12px}
+ .gb-visit-number{width:40px;height:44px}
+ .gb-visit-time{grid-column:2;white-space:normal}
+}
+
 </style></head><body>
 <main class="gb-history-page"><section class="gb-history-shell">
 <header class="gb-history-top"><div class="gb-history-eyebrow">ADM PRIANGAN 2 · BUKU TAMU DIGITAL</div><h1>Riwayat Kunjungan</h1><p>Daftar pengunjung yang tercatat pada <strong id="gb-branch-name">cabang ini</strong>.</p></header>
 <div class="gb-history-content">
-<div class="gb-history-head"><div><h2 class="gb-history-title">Daftar Tamu Berkunjung</h2><p class="gb-history-sub">Riwayat diperbarui otomatis tanpa perlu memuat ulang halaman.</p></div><span class="gb-history-count" id="gb-history-count">0 Kunjungan</span></div>
+<div class="gb-history-head"><div><h2 class="gb-history-title">Daftar Pengunjung</h2><p class="gb-history-sub">Riwayat diperbarui otomatis tanpa perlu memuat ulang halaman.</p></div><span class="gb-history-count" id="gb-history-count">0 Kunjungan</span></div>
 <div class="gb-history-tools"><input id="gb-history-search" class="gb-history-search" type="search" placeholder="Cari nama, jabatan, atau uraian tugas…" aria-label="Cari riwayat kunjungan"><button id="gb-history-refresh" class="gb-history-refresh" type="button">↻ Perbarui</button></div>
 <div class="gb-history-meta"><span id="gb-history-status">Mengambil riwayat kunjungan…</span><span class="gb-live-pill">AUTO UPDATE · 15 DETIK</span></div>
 <div id="gb-history-list" class="gb-history-scroll"><div class="gb-history-loading">Memuat data kunjungan…</div></div>
@@ -59,12 +97,18 @@ async function post(payload){
 let entries=[],busy=false;
 function render(){
  const q=(document.getElementById('gb-history-search').value||'').trim().toLowerCase();
- const rows=entries.filter(x=>[x.nama,x.name,x.instansi,x.jabatan,x.uraian].some(v=>String(v||'').toLowerCase().includes(q)));
+ const rows=entries.filter(x=>[x.nama,x.name,x.instansi,x.jabatan,x.uraian,x.keterangan].some(v=>String(v||'').toLowerCase().includes(q)));
  document.getElementById('gb-history-count').textContent=entries.length+' Kunjungan';
  const target=document.getElementById('gb-history-list');
  if(!rows.length){target.innerHTML='<div class="gb-history-empty">'+(q?'Tidak ada kunjungan yang cocok.':'Belum ada riwayat kunjungan pada cabang ini.')+'</div>';return;}
- target.innerHTML='<table class="gb-history-table"><thead><tr><th>No</th><th>Tanggal &amp; Waktu</th><th>Nama Visitor</th><th>Jabatan</th><th>Uraian Tugas</th></tr></thead><tbody>'+
- rows.map((x,i)=>'<tr><td>'+esc(x.no||i+1)+'</td><td>'+esc(x.tanggal||x.date||'-')+'</td><td><strong>'+esc(x.nama||x.name||'-')+'</strong></td><td>'+esc(x.jabatan||x.instansi||'-')+'</td><td>'+esc(x.uraian||x.purpose||'-')+'</td></tr>').join('')+'</tbody></table>';
+ target.innerHTML='<div class="gb-history-cards">'+rows.map((x,i)=>{
+   const date=x.tanggal||x.date||'-';
+   const name=x.nama||x.name||'Pengunjung';
+   const role=x.jabatan||x.instansi||'Jabatan tidak dicantumkan';
+   const purpose=x.uraian||x.purpose||x.keterangan||'Keperluan tidak dicantumkan';
+   const time=x.jam||x.time||'';
+   return '<article class="gb-visit-card"><div class="gb-visit-number">'+esc(x.no||i+1)+'</div><div><h3 class="gb-visit-name">'+esc(name)+'</h3><div class="gb-visit-meta"><span>▣ '+esc(role)+'</span><span>▤ '+esc(date)+'</span></div><div class="gb-visit-purpose">'+esc(purpose)+'</div></div><div class="gb-visit-time">'+(time?'◷ '+esc(time):'')+'</div></article>';
+ }).join('')+'</div>';
 }
 async function load(){
  if(!token){document.getElementById('gb-history-status').textContent='Token cabang tidak ditemukan.';return;}
