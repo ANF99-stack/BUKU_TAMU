@@ -4,14 +4,48 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#991b1b"><title>Buku Tamu Digital | ADM Priangan 2</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#fff7f7,#f1f5f9);font-family:Arial,Helvetica,sans-serif;color:#172033;min-height:100vh}
-.gb-shell{max-width:1200px;margin:18px auto;padding:0 4px;color:#172033}.gb-hero{background:linear-gradient(120deg,#7f1d1d,#dc2626);border-radius:18px;padding:25px 28px;color:#fff;display:flex;justify-content:space-between;align-items:center;box-shadow:0 10px 28px #991b1b22}.gb-kicker{font-size:11px;letter-spacing:2px;font-weight:800;opacity:.8}.gb-hero h2{margin:7px 0;font-size:25px}.gb-hero p{margin:0;opacity:.9}.gb-hero-icon{font-size:44px;opacity:.8}.gb-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0}.gb-stat,.gb-panel{background:#fff;border:1px solid #e5e7eb;border-radius:15px;padding:17px;box-shadow:0 4px 16px #0f172a08}.gb-stat span{display:block;color:#64748b;font-size:13px}.gb-stat b{display:block;font-size:26px;margin-top:6px;color:#991b1b}.gb-panel{margin:14px 0}.gb-panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:15px}.gb-panel-head h3{margin:0 0 5px;font-size:17px}.gb-panel-head p,.gb-qr-info p{margin:0;color:#64748b;font-size:13px}.gb-qr-row{display:flex;align-items:center;gap:22px;flex-wrap:wrap}.gb-qr-preview{width:170px;text-align:center}.gb-qr-preview img{width:150px;height:150px;object-fit:contain;border:1px solid #e5e7eb;border-radius:12px;padding:7px}.gb-qr-preview small{display:block;margin-top:6px;color:#64748b}.gb-qr-info{flex:1;min-width:240px}.gb-link-text{word-break:break-all;margin:7px 0 12px!important;color:#991b1b!important}.gb-actions{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.gb-btn{border:0;border-radius:9px;background:#b91c1c;color:white;padding:10px 14px;font-weight:700;cursor:pointer}.gb-btn.secondary{background:#f1f5f9;color:#334155;border:1px solid #e2e8f0}.gb-filters{display:flex;gap:10px;margin-bottom:12px}.gb-filters input{border:1px solid #cbd5e1;border-radius:9px;padding:10px;min-width:180px}.gb-table-wrap{overflow:auto}.gb-table{width:100%;border-collapse:collapse;min-width:760px;font-size:13px}.gb-table th,.gb-table td{padding:10px;border-bottom:1px solid #e5e7eb;text-align:left;white-space:nowrap}.gb-table th{background:#f8fafc;color:#475569}.gb-status{font-size:13px;color:#64748b;margin:8px 0}.gb-public-page{max-width:620px;margin:32px auto;padding:18px;font-family:inherit;color:#172033}.gb-public-card{background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:24px;box-shadow:0 12px 36px #0f172a12}.gb-public-brand{font-size:11px;letter-spacing:2px;color:#b91c1c;font-weight:800}.gb-public-card h1{font-size:24px;margin:8px 0}.gb-public-card p{color:#64748b}.gb-field{margin:14px 0}.gb-field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}.gb-field input,.gb-field textarea{width:100%;box-sizing:border-box;padding:12px;border:1px solid #cbd5e1;border-radius:9px;font:inherit}.gb-submit{width:100%;padding:13px;border:0;border-radius:10px;background:#b91c1c;color:#fff;font-weight:800;font-size:15px;cursor:pointer}.gb-submit:disabled{opacity:.6;cursor:wait}.gb-success{text-align:center;padding:24px 8px}.gb-success i{font-size:48px;color:#16a34a}.gb-error{color:#b91c1c;font-size:13px;margin-top:10px}@media(max-width:650px){.gb-stats{grid-template-columns:1fr}.gb-filters{flex-direction:column}.gb-filters input{width:100%;box-sizing:border-box}.gb-hero{padding:20px}.gb-hero h2{font-size:21px}.gb-panel{padding:13px}.gb-panel-head{align-items:flex-start}.gb-public-page{margin:12px auto;padding:10px}}
-.gb-public-page{max-width:620px;margin:32px auto;padding:18px}.gb-public-card{padding:clamp(20px,5vw,30px)}
-.gb-public-card input:focus,.gb-public-card textarea:focus{outline:2px solid #fecaca;border-color:#b91c1c}
-.gb-public-card .gb-public-brand{display:flex;align-items:center;gap:8px}.gb-public-brand:before{content:'📖';font-size:18px}
-.gb-public-branch{background:#fff1f2;color:#9f1239;padding:11px 13px;border-radius:9px;font-weight:700;font-size:14px;margin:16px 0}
-.gb-loading{text-align:center;color:#64748b;padding:20px}.gb-success{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;color:#166534}.gb-success p{color:#166534}
-@media(max-width:650px){.gb-public-page{margin:12px auto;padding:10px}.gb-public-card{border-radius:14px}}
+:root{--red:#b91c1c;--red-dark:#7f1d1d;--ink:#172033;--muted:#718096;--line:#e7eaf0;--surface:#fff;--soft:#fff7f7;--shadow:0 24px 70px rgba(31,41,55,.12)}
+*{box-sizing:border-box}
+html{min-height:100%;background:#f5f6fa}
+body{margin:0;min-height:100vh;padding:34px 18px;background:radial-gradient(ellipse at 10% 5%,rgba(254,226,226,.9),transparent 35%),radial-gradient(ellipse at 90% 90%,rgba(226,232,240,.8),transparent 38%),#f5f6fa;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.gb-public-page{width:100%;max-width:680px;margin:0 auto;padding:0}
+.gb-public-card{position:relative;overflow:hidden;background:var(--surface);border:1px solid rgba(255,255,255,.9);border-radius:28px;padding:0 42px 30px;box-shadow:var(--shadow)}
+.gb-public-card:before{content:"";display:block;height:9px;margin:0 -42px 30px;background:linear-gradient(90deg,#7f1d1d,#dc2626 55%,#fb7185)}
+.gb-public-card:after{content:"";position:absolute;z-index:0;top:36px;right:-78px;width:210px;height:210px;border:1px solid rgba(185,28,28,.08);border-radius:50%;box-shadow:0 0 0 22px rgba(185,28,28,.025),0 0 0 48px rgba(185,28,28,.018);pointer-events:none}
+.gb-public-brand{position:relative;z-index:1;display:inline-flex;align-items:center;gap:9px;color:var(--red);font-size:10px;font-weight:850;letter-spacing:1.8px;text-transform:uppercase}
+.gb-public-brand:before{content:"▤";display:grid;place-items:center;width:34px;height:34px;border-radius:11px;background:#fff1f2;color:var(--red);font-size:19px;letter-spacing:0}
+.gb-public-card h1{position:relative;z-index:1;margin:22px 0 8px;font-size:clamp(27px,5vw,36px);line-height:1.12;letter-spacing:-1.2px;font-weight:850;color:#171923}
+.gb-public-card>p{position:relative;z-index:1;margin:0;max-width:510px;color:var(--muted);font-size:14px;line-height:1.7}
+.gb-public-branch{position:relative;z-index:1;display:flex;align-items:center;gap:10px;margin:24px 0 22px;padding:14px 16px;border:1px solid #fee2e2;border-radius:15px;background:linear-gradient(110deg,#fff7f7,#fff);color:#991b1b;font-size:13px;font-weight:750}
+.gb-public-branch:before{content:"⌖";display:grid;place-items:center;flex:0 0 30px;height:30px;border-radius:10px;background:#fee2e2;color:#b91c1c;font-size:18px}
+#gb-public-form-wrap{position:relative;z-index:1}
+.gb-field{margin:0 0 19px}
+.gb-field label{display:flex;align-items:center;gap:5px;margin:0 0 8px;color:#303747;font-size:13px;font-weight:750;letter-spacing:.1px}
+.gb-field input,.gb-field textarea{display:block;width:100%;min-height:48px;padding:13px 15px;border:1px solid #dfe3eb;border-radius:13px;background:#fbfcfe;color:var(--ink);font:inherit;font-size:14px;line-height:1.5;outline:none;transition:border-color .18s,box-shadow .18s,background .18s}
+.gb-field textarea{min-height:100px;resize:vertical}
+.gb-field input::placeholder,.gb-field textarea::placeholder{color:#a0a8b7}
+.gb-field input:hover,.gb-field textarea:hover{border-color:#c6ccd7}
+.gb-field input:focus,.gb-field textarea:focus{border-color:#dc5555;background:#fff;box-shadow:0 0 0 4px rgba(220,38,38,.09)}
+.gb-sign-wrap{border:1px solid #e3e7ef;border-radius:15px;background:#fbfcfe;padding:12px}
+.gb-sign-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:9px;color:#475569;font-size:12px}
+.gb-sign-actions{display:flex;gap:7px}
+.gb-sign-actions button{border:1px solid #e2e8f0;border-radius:9px;background:#fff;color:#475569;padding:7px 11px;font:inherit;font-size:11px;font-weight:700;cursor:pointer}
+.gb-sign-canvas{display:block;width:100%;height:150px;border:1px dashed #cbd5e1;border-radius:11px;background:#fff;touch-action:none;cursor:crosshair}
+.gb-sign-hint{margin-top:8px;color:#94a3b8;font-size:11px}
+.gb-submit{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:53px;margin-top:8px;padding:14px 20px;border:0;border-radius:14px;background:linear-gradient(105deg,#991b1b,#dc2626);box-shadow:0 10px 22px rgba(185,28,28,.2);color:#fff;font:inherit;font-size:14px;font-weight:850;letter-spacing:.4px;cursor:pointer;transition:transform .18s,box-shadow .18s,opacity .18s}
+.gb-submit:after{content:"→";font-size:19px;font-weight:500}
+.gb-submit:hover{transform:translateY(-1px);box-shadow:0 14px 26px rgba(185,28,28,.25)}
+.gb-submit:active{transform:translateY(0)}
+.gb-submit:disabled{opacity:.65;cursor:wait;transform:none}
+.gb-loading{padding:28px 12px;text-align:center;color:var(--muted);font-size:13px}
+.gb-success{padding:30px 20px;text-align:center;border:1px solid #bbf7d0;border-radius:18px;background:linear-gradient(145deg,#f0fdf4,#fff);color:#166534}
+.gb-success i{display:grid;place-items:center;width:58px;height:58px;margin:0 auto 14px;border-radius:50%;background:#dcfce7;font-style:normal;font-size:28px}
+.gb-success h2{margin:0 0 7px;color:#166534;font-size:23px}
+.gb-success p{margin:0;color:#39805a;font-size:14px;line-height:1.6}
+.gb-error{margin:12px 0 0;padding:11px 13px;border:1px solid #fecaca;border-radius:11px;background:#fff1f2;color:#b91c1c;font-size:13px;line-height:1.5}
+.gb-public-card footer{margin-top:26px!important;padding-top:18px;border-top:1px solid #eef0f4;color:#9aa3b2!important;font-size:11px!important;letter-spacing:.2px}
+@media(max-width:600px){body{padding:14px 10px;background:#f6f7fb}.gb-public-card{border-radius:21px;padding:0 21px 23px}.gb-public-card:before{height:7px;margin:0 -21px 23px}.gb-public-card:after{top:30px;right:-120px}.gb-public-card h1{margin-top:19px;font-size:29px}.gb-public-card>p{font-size:13px}.gb-public-branch{margin:20px 0;padding:12px}.gb-field{margin-bottom:16px}.gb-field input,.gb-field textarea{border-radius:12px}.gb-submit{min-height:51px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
 </style></head><body>
 <main class="gb-public-page"><section class="gb-public-card">
 <div class="gb-public-brand">ADM PRIANGAN 2 · BUKU TAMU DIGITAL</div>
@@ -32,13 +66,27 @@ const gbPost = async payload => {
   async function gbSubmitPublic(event){
     event.preventDefault();const form=event.currentTarget,btn=form.querySelector('button[type=submit]');if(btn.disabled)return;
     const token=(new URLSearchParams(location.search).get('token')||'').trim();
-    const payload={action:'saveGuestbookEntry',token,name:form.nama.value.trim(),jabatan:form.jabatan.value.trim(),uraian:form.uraian.value.trim(),paraf:form.paraf.value.trim(),keterangan:form.keterangan.value.trim()};
+    const signature=window.gbSignatureData();
+    const payload={action:'saveGuestbookEntry',token,name:form.nama.value.trim(),jabatan:form.jabatan.value.trim(),uraian:form.uraian.value.trim(),paraf:signature,keterangan:form.keterangan.value.trim()};
     const error=document.getElementById('gb-public-error');
-    if(!token||!payload.name||!payload.uraian||!payload.paraf){error.textContent='Mohon lengkapi nama visitor, uraian tugas, dan paraf.';return;}
+    if(!token||!payload.name||!payload.uraian||!payload.paraf){error.textContent='Mohon lengkapi nama visitor, uraian tugas, dan tanda tangan digital.';return;}
     btn.disabled=true;btn.textContent='Menyimpan…';
     try{await gbPost(payload);document.getElementById('gb-public-form-wrap').innerHTML='<div class="gb-success"><i class="fa-solid fa-circle-check"></i><h2>Terima kasih!</h2><p>Data kunjungan Anda berhasil disimpan.</p></div>';}
     catch(e){error.textContent='Gagal menyimpan kunjungan: '+e.message;btn.disabled=false;btn.textContent='SIMPAN KUNJUNGAN';}
   }
+  let gbHasSignature=false;
+  function gbInitSignature(){
+    const canvas=document.getElementById('gb-sign-canvas');if(!canvas)return;
+    const ctx=canvas.getContext('2d');let drawing=false,last=null;
+    const resize=()=>{const ratio=Math.max(1,window.devicePixelRatio||1),rect=canvas.getBoundingClientRect();const snapshot=gbHasSignature?canvas.toDataURL():null;canvas.width=Math.round(rect.width*ratio);canvas.height=Math.round(150*ratio);ctx.setTransform(ratio,0,0,ratio,0,0);ctx.lineWidth=2.5;ctx.lineCap='round';ctx.lineJoin='round';ctx.strokeStyle='#172033';if(snapshot){const img=new Image();img.onload=()=>ctx.drawImage(img,0,0,rect.width,150);img.src=snapshot;}};
+    resize();window.addEventListener('resize',resize);
+    const point=e=>{const r=canvas.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top};};
+    canvas.addEventListener('pointerdown',e=>{e.preventDefault();drawing=true;last=point(e);canvas.setPointerCapture(e.pointerId);ctx.beginPath();ctx.arc(last.x,last.y,1.2,0,Math.PI*2);ctx.fill();gbHasSignature=true;});
+    canvas.addEventListener('pointermove',e=>{if(!drawing)return;e.preventDefault();const p=point(e);ctx.beginPath();ctx.moveTo(last.x,last.y);ctx.lineTo(p.x,p.y);ctx.stroke();last=p;gbHasSignature=true;});
+    const stop=()=>{drawing=false;last=null;};canvas.addEventListener('pointerup',stop);canvas.addEventListener('pointercancel',stop);canvas.addEventListener('pointerleave',e=>{if(e.buttons===0)stop();});
+    document.getElementById('gb-sign-undo')?.addEventListener('click',()=>{ctx.clearRect(0,0,canvas.width,canvas.height);gbHasSignature=false;});
+  }
+  window.gbSignatureData=()=>{const c=document.getElementById('gb-sign-canvas');return gbHasSignature&&c?c.toDataURL('image/png'):'';};
   async function gbStartPublic(){
     const token=(new URLSearchParams(location.search).get('token')||'').trim();
     const wrap=document.getElementById('gb-public-form-wrap');
@@ -46,8 +94,9 @@ const gbPost = async payload => {
     try{
       const result=await gbPost({action:'getGuestbookPublicInfo',token});const branch=result.branch||{};
       document.getElementById('gb-public-branch').textContent='Cabang: '+(branch.name||'ADM Priangan 2');
-      wrap.innerHTML=`<form id="gb-public-form"><div class="gb-field"><label>Nama Visitor *</label><input name="nama" maxlength="100" required autocomplete="name" placeholder="Nama lengkap pengunjung"></div><div class="gb-field"><label>Jabatan</label><input name="jabatan" maxlength="100" placeholder="Jabatan / posisi"></div><div class="gb-field"><label>Uraian Tugas / Keperluan *</label><textarea name="uraian" maxlength="500" rows="3" required placeholder="Tuliskan uraian tugas atau keperluan kunjungan"></textarea></div><div class="gb-field"><label>Paraf *</label><input name="paraf" maxlength="100" required placeholder="Ketik nama atau paraf singkat"></div><div class="gb-field"><label>Keterangan</label><textarea name="keterangan" maxlength="500" rows="2" placeholder="Keterangan tambahan (opsional)"></textarea></div><button class="gb-submit" type="submit">SIMPAN KUNJUNGAN</button><div id="gb-public-error" class="gb-error" role="alert"></div></form>`;
+      wrap.innerHTML=`<form id="gb-public-form"><div class="gb-field"><label>Nama Visitor *</label><input name="nama" maxlength="100" required autocomplete="name" placeholder="Nama lengkap pengunjung"></div><div class="gb-field"><label>Jabatan</label><input name="jabatan" maxlength="100" placeholder="Jabatan / posisi"></div><div class="gb-field"><label>Uraian Tugas / Keperluan *</label><textarea name="uraian" maxlength="500" rows="3" required placeholder="Tuliskan uraian tugas atau keperluan kunjungan"></textarea></div><div class="gb-field"><label>Tanda Tangan Digital (E-Sign) <span style="color:#dc2626">*</span></label><div class="gb-sign-wrap"><div class="gb-sign-head"><span>Gunakan jari atau mouse untuk tanda tangan</span><div class="gb-sign-actions"><button type="button" id="gb-sign-undo">Hapus</button></div></div><canvas id="gb-sign-canvas" class="gb-sign-canvas" aria-label="Area tanda tangan digital"></canvas><div class="gb-sign-hint">Pastikan tanda tangan terlihat jelas sebelum menyimpan.</div></div></div><div class="gb-field"><label>Keterangan</label><textarea name="keterangan" maxlength="500" rows="2" placeholder="Keterangan tambahan (opsional)"></textarea></div><button class="gb-submit" type="submit">SIMPAN KUNJUNGAN</button><div id="gb-public-error" class="gb-error" role="alert"></div></form>`;
       document.getElementById('gb-public-form').addEventListener('submit',gbSubmitPublic);
+      gbInitSignature();
     }catch(e){wrap.innerHTML='<p class="gb-error">Link Buku Tamu tidak valid atau tidak aktif. '+gbEsc(e.message)+'</p>';}
   }
 
